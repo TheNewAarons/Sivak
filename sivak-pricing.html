@@ -3,11 +3,10 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Precios — Sivak ERP</title>
+<title>Precios — Sivak · Desarrollo de software</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="./pricing.css" />
 <style>
 :root {
   --carbon:      #111110;
@@ -21,6 +20,9 @@
   --success-bg:  #e1f5ee;
   --success-bdr: #9fe1cb;
   --link:        #1a3a5c;
+  --link-bg:     #e6f1fb;
+  --warn:        #854f0b;
+  --warn-bg:     #faeeda;
   --serif: 'DM Serif Display', Georgia, serif;
   --sans:  'DM Sans', system-ui, sans-serif;
   --mono:  'Space Mono', 'Courier New', monospace;
@@ -41,7 +43,7 @@ nav{position:sticky;top:0;z-index:200;background:var(--carbon);display:flex;alig
 /* COVER */
 .cover{background:var(--carbon);padding:5.5rem 2.5rem 5rem;position:relative;overflow:hidden;}
 .cover-wm{position:absolute;right:-60px;top:50%;transform:translateY(-50%);font-family:var(--serif);font-size:26vw;color:rgba(255,255,255,.018);line-height:1;pointer-events:none;user-select:none;}
-.cover-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 340px;gap:5rem;align-items:center;position:relative;z-index:2;}
+.cover-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 360px;gap:5rem;align-items:center;position:relative;z-index:2;}
 .cover-eyebrow{font-family:var(--mono);font-size:11px;color:rgba(255,255,255,.3);letter-spacing:.15em;text-transform:uppercase;margin-bottom:1.5rem;}
 .cover-h1{font-family:var(--serif);font-size:clamp(3rem,6vw,5rem);color:var(--white);line-height:1;letter-spacing:-.03em;margin-bottom:1.5rem;}
 .cover-h1 em{color:var(--carbon-40);font-style:italic;}
@@ -49,64 +51,61 @@ nav{position:sticky;top:0;z-index:200;background:var(--carbon);display:flex;alig
 .cover-stats{display:flex;gap:2rem;padding-top:1.75rem;border-top:.5px solid rgba(255,255,255,.1);}
 .cs-val{font-family:var(--serif);font-size:1.4rem;color:var(--white);line-height:1;}
 .cs-lbl{font-size:11px;color:rgba(255,255,255,.3);letter-spacing:.08em;text-transform:uppercase;margin-top:3px;}
+
+/* Cover right — alerta de contexto */
 .cover-right{background:rgba(255,255,255,.04);border:.5px solid rgba(255,255,255,.08);border-radius:14px;padding:1.75rem;}
-.toggle-block{background:rgba(255,255,255,.04);border:.5px solid rgba(255,255,255,.07);border-radius:8px;padding:1.1rem;margin-bottom:1rem;}
-.toggle-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
-.toggle-title{font-size:12px;color:rgba(255,255,255,.45);font-weight:500;}
-.badge-save{background:var(--success-bg);color:var(--success);font-family:var(--mono);font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;letter-spacing:.04em;}
-.toggle-wrap{display:flex;align-items:center;gap:10px;}
-.toggle-opt{font-size:12px;font-weight:500;color:rgba(255,255,255,.3);cursor:pointer;transition:color .15s;}
-.toggle-opt.active{color:var(--white);}
-.toggle-btn{position:relative;width:38px;height:21px;background:rgba(255,255,255,.15);border-radius:9999px;cursor:pointer;border:none;transition:background .2s;flex-shrink:0;}
-.toggle-btn.on{background:var(--success);}
-.toggle-btn::after{content:'';position:absolute;top:3px;left:3px;width:15px;height:15px;background:var(--white);border-radius:50%;transition:transform .2s;box-shadow:0 1px 3px rgba(0,0,0,.25);}
-.toggle-btn.on::after{transform:translateX(17px);}
-.plan-summary{display:flex;flex-direction:column;}
-.ps-row{display:flex;align-items:center;justify-content:space-between;padding:9px 0;border-bottom:.5px solid rgba(255,255,255,.07);}
-.ps-row:last-child{border-bottom:none;}
-.ps-name{font-size:12px;color:rgba(255,255,255,.5);}
-.ps-name strong{color:var(--white);font-weight:500;}
-.ps-price{font-family:var(--mono);font-size:12px;color:var(--white);}
-.ps-price small{font-size:10px;color:rgba(255,255,255,.3);}
+.cover-alert-title{font-family:var(--mono);font-size:10px;color:rgba(255,255,255,.3);letter-spacing:.12em;text-transform:uppercase;font-weight:700;margin-bottom:.85rem;}
+.cover-points{display:flex;flex-direction:column;gap:0;}
+.cp-item{display:flex;align-items:flex-start;gap:10px;padding:11px 0;border-bottom:.5px solid rgba(255,255,255,.06);}
+.cp-item:last-child{border-bottom:none;}
+.cp-num{font-family:var(--mono);font-size:10px;color:rgba(255,255,255,.2);flex-shrink:0;margin-top:2px;}
+.cp-text{font-size:12px;color:rgba(255,255,255,.5);line-height:1.5;}
+.cp-text strong{color:rgba(255,255,255,.8);font-weight:500;}
 
 /* LAYOUT */
 .full-hr{height:.5px;background:var(--carbon-20);}
 section.page{max-width:1100px;margin:0 auto;padding:5.5rem 2.5rem;}
 .eyebrow{font-family:var(--mono);font-size:11px;color:var(--carbon-60);letter-spacing:.15em;text-transform:uppercase;margin-bottom:.75rem;font-weight:700;}
 .section-h{font-family:var(--serif);font-size:clamp(1.8rem,3vw,2.4rem);color:var(--carbon);line-height:1.15;letter-spacing:-.02em;margin-bottom:.85rem;}
-.section-p{font-size:15px;color:var(--carbon-60);line-height:1.8;max-width:600px;margin-bottom:2.5rem;}
+.section-p{font-size:15px;color:var(--carbon-60);line-height:1.8;max-width:620px;margin-bottom:2.5rem;}
+.sub-h{font-family:var(--serif);font-size:1.2rem;color:var(--carbon);margin-bottom:.75rem;margin-top:2.25rem;}
 
-/* PLAN CARDS */
-.plans-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;align-items:start;}
-.plan-card{background:var(--white);border:.5px solid var(--carbon-20);border-radius:12px;padding:1.75rem;position:relative;}
-.plan-card.featured{background:var(--carbon);border:.5px solid transparent;}
-.plan-card-tag{position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--carbon);color:var(--white);font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 12px;border-radius:20px;white-space:nowrap;}
-.plan-tier{font-family:var(--mono);font-size:10px;color:var(--carbon-40);letter-spacing:.12em;text-transform:uppercase;font-weight:700;margin-bottom:.6rem;}
-.plan-card.featured .plan-tier{color:rgba(255,255,255,.25);}
-.plan-name{font-family:var(--serif);font-size:1.4rem;color:var(--carbon);margin-bottom:.35rem;letter-spacing:-.01em;}
-.plan-card.featured .plan-name{color:var(--white);}
-.plan-tagline{font-size:13px;color:var(--carbon-60);line-height:1.55;margin-bottom:1.5rem;}
-.plan-card.featured .plan-tagline{color:rgba(255,255,255,.35);}
-.plan-price{display:flex;align-items:baseline;gap:3px;margin-bottom:.35rem;}
-.price-curr{font-family:var(--mono);font-size:12px;color:var(--carbon-60);margin-bottom:6px;}
-.plan-card.featured .price-curr{color:rgba(255,255,255,.3);}
-.price-amount{font-family:var(--serif);font-size:2.6rem;line-height:1;letter-spacing:-.03em;color:var(--carbon);}
-.plan-card.featured .price-amount{color:var(--white);}
-.price-period{font-size:13px;color:var(--carbon-60);}
-.plan-card.featured .price-period{color:rgba(255,255,255,.3);}
-.price-note{font-family:var(--mono);font-size:11px;color:var(--carbon-60);min-height:18px;margin-bottom:1.25rem;}
-.plan-card.featured .price-note{color:rgba(255,255,255,.25);}
-.plan-divider{border:none;border-top:.5px solid var(--carbon-20);margin-bottom:1.1rem;}
-.plan-card.featured .plan-divider{border-color:rgba(255,255,255,.1);}
-.plan-users{font-size:12px;font-weight:500;color:var(--carbon-60);display:flex;align-items:center;gap:6px;margin-bottom:1rem;letter-spacing:.03em;}
-.plan-card.featured .plan-users{color:rgba(255,255,255,.4);}
-.feature-list{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:1.5rem;}
-.feature-list li{font-size:13px;color:var(--carbon-60);display:flex;align-items:flex-start;gap:8px;line-height:1.45;}
-.plan-card.featured .feature-list li{color:rgba(255,255,255,.55);}
-.fi-check{flex-shrink:0;width:15px;height:15px;background:var(--success-bg);border-radius:50%;display:flex;align-items:center;justify-content:center;margin-top:1px;}
-.plan-card.featured .fi-check{background:rgba(15,110,86,.3);}
+/* ALERT BOX */
+.alert{border-radius:8px;padding:11px 14px;display:flex;gap:9px;align-items:flex-start;margin-bottom:2rem;font-size:13px;}
+.alert.warn{background:var(--warn-bg);color:var(--warn);}
+.alert.info{background:var(--link-bg);color:var(--link);}
+.alert-icon{flex-shrink:0;margin-top:1px;}
 
-/* BUTTONS — exactos del brand book */
+/* PROJECT CARDS GRID */
+.projects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:10px;}
+.projects-grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
+.proj-card{background:var(--white);border:.5px solid var(--carbon-20);border-radius:12px;padding:1.5rem;}
+.proj-card.highlight{background:var(--carbon);border-color:transparent;}
+.proj-type{font-family:var(--mono);font-size:10px;color:var(--carbon-40);letter-spacing:.12em;text-transform:uppercase;font-weight:700;margin-bottom:.5rem;}
+.proj-card.highlight .proj-type{color:rgba(255,255,255,.25);}
+.proj-name{font-family:var(--serif);font-size:1.2rem;color:var(--carbon);margin-bottom:.3rem;letter-spacing:-.01em;}
+.proj-card.highlight .proj-name{color:var(--white);}
+.proj-desc{font-size:12px;color:var(--carbon-60);line-height:1.55;margin-bottom:1.1rem;}
+.proj-card.highlight .proj-desc{color:rgba(255,255,255,.35);}
+.proj-divider{border:none;border-top:.5px solid var(--carbon-20);margin-bottom:1rem;}
+.proj-card.highlight .proj-divider{border-color:rgba(255,255,255,.1);}
+.proj-range-label{font-family:var(--mono);font-size:10px;color:var(--carbon-40);letter-spacing:.08em;text-transform:uppercase;margin-bottom:3px;}
+.proj-card.highlight .proj-range-label{color:rgba(255,255,255,.25);}
+.proj-range{font-family:var(--serif);font-size:1.6rem;line-height:1;letter-spacing:-.02em;color:var(--carbon);margin-bottom:3px;}
+.proj-card.highlight .proj-range{color:var(--white);}
+.proj-range-note{font-size:11px;color:var(--carbon-60);margin-bottom:1rem;}
+.proj-card.highlight .proj-range-note{color:rgba(255,255,255,.3);}
+.proj-includes-label{font-family:var(--mono);font-size:10px;color:var(--carbon-40);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.6rem;}
+.proj-card.highlight .proj-includes-label{color:rgba(255,255,255,.2);}
+.proj-features{list-style:none;display:flex;flex-direction:column;gap:5px;margin-bottom:1.25rem;}
+.proj-features li{font-size:12px;color:var(--carbon-60);display:flex;align-items:flex-start;gap:7px;line-height:1.4;}
+.proj-card.highlight .proj-features li{color:rgba(255,255,255,.45);}
+.fi-dot{flex-shrink:0;width:13px;height:13px;background:var(--success-bg);border-radius:50%;display:flex;align-items:center;justify-content:center;margin-top:1px;}
+.proj-card.highlight .fi-dot{background:rgba(15,110,86,.3);}
+.proj-timeline{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--carbon-60);margin-bottom:1rem;font-family:var(--mono);}
+.proj-card.highlight .proj-timeline{color:rgba(255,255,255,.3);}
+
+/* BUTTONS */
 .btn-p{display:block;width:100%;text-align:center;background:var(--carbon);color:var(--white);font-size:13px;font-weight:500;padding:9px 20px;border-radius:6px;border:none;cursor:pointer;font-family:var(--sans);text-decoration:none;transition:opacity .15s;}
 .btn-p:hover{opacity:.85;}
 .btn-s{display:block;width:100%;text-align:center;background:transparent;color:var(--carbon);font-size:13px;font-weight:500;padding:8px 20px;border-radius:6px;border:1px solid var(--carbon);cursor:pointer;font-family:var(--sans);text-decoration:none;transition:background .15s;}
@@ -115,38 +114,33 @@ section.page{max-width:1100px;margin:0 auto;padding:5.5rem 2.5rem;}
 .btn-g:hover{border-color:var(--carbon-40);color:var(--carbon);}
 .btn-white{display:block;width:100%;text-align:center;background:var(--white);color:var(--carbon);font-size:13px;font-weight:500;padding:9px 20px;border-radius:6px;border:none;cursor:pointer;font-family:var(--sans);text-decoration:none;transition:opacity .15s;}
 .btn-white:hover{opacity:.88;}
-.btn-ghost-w{display:block;width:100%;text-align:center;background:transparent;color:rgba(255,255,255,.6);font-size:13px;font-weight:500;padding:8px 20px;border-radius:6px;border:.5px solid rgba(255,255,255,.2);cursor:pointer;font-family:var(--sans);text-decoration:none;transition:border-color .15s,color .15s;}
-.btn-ghost-w:hover{border-color:rgba(255,255,255,.5);color:var(--white);}
-.plan-footnote{font-size:11px;color:var(--carbon-40);text-align:center;margin-top:8px;}
-.plan-card.featured .plan-footnote{color:rgba(255,255,255,.2);}
 
-/* TABLE */
+/* HORA TABLE */
+.rate-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:10px;}
+.rate-card{background:var(--white);border:.5px solid var(--carbon-20);border-radius:12px;padding:1.25rem;}
+.rate-role{font-family:var(--mono);font-size:10px;color:var(--carbon-40);letter-spacing:.1em;text-transform:uppercase;font-weight:700;margin-bottom:.4rem;}
+.rate-title{font-size:14px;font-weight:500;color:var(--carbon);margin-bottom:.3rem;}
+.rate-amount{font-family:var(--serif);font-size:1.5rem;letter-spacing:-.02em;color:var(--carbon);line-height:1;margin-bottom:.25rem;}
+.rate-note{font-size:11px;color:var(--carbon-60);line-height:1.45;}
+
+/* MODELO TABLE */
 .ui-table{width:100%;border-collapse:collapse;}
 .ui-table th{font-size:11px;font-weight:500;color:var(--carbon-60);text-transform:uppercase;letter-spacing:.07em;padding:9px 13px;border-bottom:1px solid var(--carbon-20);text-align:left;background:var(--parchment);}
-.ui-table th:not(:first-child){text-align:center;}
-.ui-table th.col-f{font-family:var(--serif);font-size:13px;text-transform:none;letter-spacing:0;color:var(--carbon);}
 .ui-table td{font-size:13px;color:var(--carbon);padding:9px 13px;border-bottom:.5px solid var(--carbon-20);}
 .ui-table tr:last-child td{border-bottom:none;}
-.ui-table td:not(:first-child){text-align:center;}
-.ui-table tbody tr.gh td{font-family:var(--mono);font-size:10px;color:var(--carbon-40);letter-spacing:.1em;text-transform:uppercase;background:var(--parchment);padding:8px 13px 6px;border-bottom:none;}
-.ui-table tbody tr:hover:not(.gh){background:rgba(15,110,86,.03);}
-.tick{color:var(--success);font-size:14px;}
-.cross{color:var(--carbon-40);}
-.partial{font-family:var(--mono);font-size:11px;color:var(--carbon-60);}
+.ui-table tbody tr:hover{background:rgba(15,110,86,.03);}
 
-/* BILLING DARK */
-.billing-section{background:var(--carbon);padding:5.5rem 2.5rem;}
-.billing-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem 5rem;align-items:start;}
-.billing-eyebrow{font-family:var(--mono);font-size:11px;color:rgba(255,255,255,.3);letter-spacing:.15em;text-transform:uppercase;font-weight:700;margin-bottom:.75rem;}
-.billing-h{font-family:var(--serif);font-size:1.8rem;color:var(--white);line-height:1.1;letter-spacing:-.02em;margin-bottom:.75rem;}
-.billing-p{font-size:14px;color:rgba(255,255,255,.35);line-height:1.75;margin-bottom:2rem;}
-.billing-items{display:flex;flex-direction:column;}
-.billing-item{display:flex;gap:12px;align-items:flex-start;padding:14px 0;border-bottom:.5px solid rgba(255,255,255,.07);}
-.billing-item:last-child{border-bottom:none;}
-.bi-icon{flex-shrink:0;width:32px;height:32px;background:rgba(255,255,255,.06);border:.5px solid rgba(255,255,255,.1);border-radius:8px;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.4);}
-.bi-title{font-size:13px;font-weight:500;color:var(--white);margin-bottom:2px;}
-.bi-desc{font-size:12px;color:rgba(255,255,255,.3);line-height:1.55;}
-.bi-desc a{color:rgba(255,255,255,.5);}
+/* PROCESO DARK */
+.proceso-section{background:var(--carbon);padding:5.5rem 2.5rem;}
+.proceso-inner{max-width:1100px;margin:0 auto;}
+.proceso-eyebrow{font-family:var(--mono);font-size:11px;color:rgba(255,255,255,.3);letter-spacing:.15em;text-transform:uppercase;font-weight:700;margin-bottom:.75rem;}
+.proceso-h{font-family:var(--serif);font-size:clamp(1.8rem,3vw,2.4rem);color:var(--white);line-height:1.15;letter-spacing:-.02em;margin-bottom:.85rem;}
+.proceso-p{font-size:15px;color:rgba(255,255,255,.35);line-height:1.8;max-width:560px;margin-bottom:2.5rem;}
+.steps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
+.step-card{background:rgba(255,255,255,.04);border:.5px solid rgba(255,255,255,.08);border-radius:12px;padding:1.25rem;}
+.step-num{font-family:var(--mono);font-size:11px;color:rgba(255,255,255,.2);letter-spacing:.1em;margin-bottom:.75rem;}
+.step-title{font-family:var(--serif);font-size:1.05rem;color:var(--white);margin-bottom:.4rem;line-height:1.2;}
+.step-desc{font-size:12px;color:rgba(255,255,255,.35);line-height:1.6;}
 
 /* FAQ */
 .faq-wrap{max-width:720px;margin:0 auto;}
@@ -167,32 +161,23 @@ footer{background:var(--carbon);border-top:.5px solid rgba(255,255,255,.08);padd
 .footer-meta a{color:rgba(255,255,255,.35);text-decoration:none;}
 .footer-meta a:hover{color:rgba(255,255,255,.6);}
 
-/* PRICE TOGGLE */
-.price-monthly{display:flex;}
-.price-annual{display:none;}
-body.annual .price-monthly{display:none;}
-body.annual .price-annual{display:flex;}
-.annual-note{display:none;}
-body.annual .annual-note{display:block;}
-.monthly-note{display:block;}
-body.annual .monthly-note{display:none;}
-
 @media(max-width:900px){
-  .cover-inner{grid-template-columns:1fr;}
+  .cover-inner,.billing-inner{grid-template-columns:1fr;}
   .cover-right{display:none;}
-  .plans-grid{grid-template-columns:1fr;max-width:480px;}
-  .billing-inner{grid-template-columns:1fr;}
+  .projects-grid{grid-template-columns:1fr;}
+  .projects-grid-2{grid-template-columns:1fr;}
+  .rate-grid{grid-template-columns:1fr 1fr;}
+  .steps-grid{grid-template-columns:1fr 1fr;}
   footer{flex-direction:column;gap:1rem;text-align:center;}
   .footer-meta{text-align:center;}
-  nav{padding:0 1.25rem;}
-  section.page{padding:3.5rem 1.25rem;}
-  .billing-section{padding:3.5rem 1.25rem;}
-  .cover{padding:4rem 1.25rem 3.5rem;}
+  nav,.cover,.proceso-section,section.page{padding-left:1.25rem;padding-right:1.25rem;}
+  nav{padding-top:0;padding-bottom:0;}
 }
 </style>
 </head>
 <body>
 
+<!-- NAV -->
 <nav>
   <a class="nav-brand" href="#">
     <svg width="20" height="20" viewBox="0 0 36 36" fill="none">
@@ -218,258 +203,267 @@ body.annual .monthly-note{display:none;}
     Sivak
   </a>
   <div class="nav-links">
-    <a href="#planes">Planes</a>
-    <a href="#comparacion">Comparación</a>
+    <a href="#proyectos">Proyectos</a>
+    <a href="#proceso">Proceso</a>
     <a href="#faq">FAQ</a>
   </div>
-  <a class="nav-cta" href="mailto:support@sivaksoft.com">Contactar ventas</a>
+  <a class="nav-cta" href="mailto:aaron.soto@sivaksoft.com">Pedir cotización</a>
 </nav>
 
+<!-- COVER -->
 <div class="cover">
   <div class="cover-wm">Sv</div>
   <div class="cover-inner">
     <div>
-      <p class="cover-eyebrow">Precios · Sivak ERP · 2026</p>
-      <h1 class="cover-h1">Precios<br>sin <em>letra<br>chica</em></h1>
-      <p class="cover-desc">Facturación electrónica DTE, inventario, ventas y contabilidad para PYMEs. Desde $99 USD/mes, sin implementaciones caras ni contratos anuales forzados.</p>
+      <p class="cover-eyebrow">Tarifas · Sivak Software House · 2026</p>
+      <h1 class="cover-h1">Cuánto<br>cuesta tu<br><em>proyecto</em></h1>
+      <p class="cover-desc">Rangos de referencia para desarrollo de software a medida. Cada proyecto es distinto — estas cifras son puntos de partida para conversar, no precios fijos.</p>
       <div class="cover-stats">
-        <div><div class="cs-val">3</div><div class="cs-lbl">Planes</div></div>
-        <div><div class="cs-val">14 días</div><div class="cs-lbl">Prueba gratis</div></div>
-        <div><div class="cs-val">−17%</div><div class="cs-lbl">Pago anual</div></div>
+        <div><div class="cs-val">Precio fijo</div><div class="cs-lbl">Modelo de cobro</div></div>
+        <div><div class="cs-val">2–16 sem</div><div class="cs-lbl">Plazo típico</div></div>
+        <div><div class="cs-val">5+ tipos</div><div class="cs-lbl">De proyecto</div></div>
       </div>
     </div>
     <div class="cover-right">
-      <div class="toggle-block">
-        <div class="toggle-row">
-          <span class="toggle-title">Tipo de facturación</span>
-          <span class="badge-save">Ahorra 17%</span>
+      <p class="cover-alert-title">Antes de ver los precios</p>
+      <div class="cover-points">
+        <div class="cp-item">
+          <span class="cp-num">01</span>
+          <span class="cp-text">Los rangos son <strong>estimaciones referenciales</strong>. El precio real depende del alcance, integraciones y tiempo.</span>
         </div>
-        <div class="toggle-wrap">
-          <span class="toggle-opt active" id="opt-monthly">Mensual</span>
-          <button class="toggle-btn" id="billing-toggle" aria-pressed="false"></button>
-          <span class="toggle-opt" id="opt-annual">Anual</span>
+        <div class="cp-item">
+          <span class="cp-num">02</span>
+          <span class="cp-text">Siempre partimos con una <strong>reunión de levantamiento gratuita</strong> antes de cotizar formalmente.</span>
         </div>
-      </div>
-      <div class="plan-summary">
-        <div class="ps-row">
-          <span class="ps-name"><strong>Starter</strong> · 3 usuarios</span>
-          <span class="ps-price"><span class="price-monthly">$99<small>/mes</small></span><span class="price-annual">$82<small>/mes</small></span></span>
+        <div class="cp-item">
+          <span class="cp-num">03</span>
+          <span class="cp-text">Precios en <strong>USD sin IVA</strong>. Al facturar en Chile se agrega el 19%.</span>
         </div>
-        <div class="ps-row">
-          <span class="ps-name"><strong>Profesional</strong> · 10 usuarios</span>
-          <span class="ps-price"><span class="price-monthly">$299<small>/mes</small></span><span class="price-annual">$249<small>/mes</small></span></span>
-        </div>
-        <div class="ps-row">
-          <span class="ps-name"><strong>Enterprise</strong> · ilimitado</span>
-          <span class="ps-price">$999+<small>/mes</small></span>
+        <div class="cp-item">
+          <span class="cp-num">04</span>
+          <span class="cp-text">Todos los proyectos se cotizan con <strong>precio fijo</strong>. Los cambios de scope se acuerdan antes de implementar.</span>
         </div>
       </div>
     </div>
   </div>
 </div>
 
+<!-- PROYECTOS -->
 <div class="full-hr"></div>
-<section class="page" id="planes">
-  <p class="eyebrow">02 — Planes</p>
-  <h2 class="section-h">Elige tu plan</h2>
-  <p class="section-p">Todos los planes incluyen prueba gratuita de 14 días sin tarjeta de crédito. Precios en USD sin IVA — al facturar en Chile se aplica el 19%.</p>
+<section class="page" id="proyectos">
+  <p class="eyebrow">02 — Tipos de proyecto</p>
+  <h2 class="section-h">¿Qué tipo de sistema necesitas?</h2>
+  <p class="section-p">Rangos de precio por categoría según complejidad habitual. El precio final se determina en la cotización formal tras el levantamiento de requerimientos.</p>
 
-  <div class="plans-grid">
-    <!-- Starter -->
-    <div class="plan-card">
-      <p class="plan-tier">Plan · Starter</p>
-      <h2 class="plan-name">Starter</h2>
-      <p class="plan-tagline">Para negocios que están dando sus primeros pasos con la gestión digital.</p>
-      <div class="price-monthly plan-price"><span class="price-curr">USD</span><span class="price-amount">99</span><span class="price-period">/mes</span></div>
-      <div class="price-annual plan-price"><span class="price-curr">USD</span><span class="price-amount">82</span><span class="price-period">/mes</span></div>
-      <p class="price-note annual-note">$990 USD/año · Ahorras $198</p>
-      <p class="price-note monthly-note">&nbsp;</p>
-      <hr class="plan-divider" />
-      <div class="plan-users">
-        <svg width="13" height="13" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4" stroke="#b4b2a9" stroke-width="1.8"/><path d="M4 20c0-3.314 3.582-6 8-6s8 2.686 8 6" stroke="#b4b2a9" stroke-width="1.8" stroke-linecap="round"/></svg>
-        Hasta 3 usuarios
-      </div>
-      <ul class="feature-list">
-        <li><span class="fi-check"><svg width="9" height="9" viewBox="0 0 10 10" fill="none"><polyline points="2,5.5 4,7.5 8,3" stroke="#0f6e56" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Facturación electrónica DTE (SII)</li>
-        <li><span class="fi-check"><svg width="9" height="9" viewBox="0 0 10 10" fill="none"><polyline points="2,5.5 4,7.5 8,3" stroke="#0f6e56" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Inventario y control de stock</li>
-        <li><span class="fi-check"><svg width="9" height="9" viewBox="0 0 10 10" fill="none"><polyline points="2,5.5 4,7.5 8,3" stroke="#0f6e56" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Ventas y cotizaciones</li>
-        <li><span class="fi-check"><svg width="9" height="9" viewBox="0 0 10 10" fill="none"><polyline points="2,5.5 4,7.5 8,3" stroke="#0f6e56" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Compras y órdenes de compra</li>
-        <li><span class="fi-check"><svg width="9" height="9" viewBox="0 0 10 10" fill="none"><polyline points="2,5.5 4,7.5 8,3" stroke="#0f6e56" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Contabilidad básica y libro mayor</li>
-        <li><span class="fi-check"><svg width="9" height="9" viewBox="0 0 10 10" fill="none"><polyline points="2,5.5 4,7.5 8,3" stroke="#0f6e56" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Soporte por email (48 h)</li>
+  <div class="alert warn">
+    <span class="alert-icon">⚠</span>
+    <span>Estos rangos son referenciales. Un sistema con muchas integraciones, roles complejos o alta carga puede salir del rango superior. Siempre cotizamos antes de comprometer un precio.</span>
+  </div>
+
+  <div class="projects-grid">
+
+    <!-- Sitio web corporativo -->
+    <div class="proj-card">
+      <p class="proj-type">Categoría · Web</p>
+      <h3 class="proj-name">Sitio web corporativo</h3>
+      <p class="proj-desc">Presencia online profesional con páginas de servicio, sobre nosotros, contacto y blog opcional.</p>
+      <hr class="proj-divider" />
+      <p class="proj-range-label">Rango estimado</p>
+      <p class="proj-range">$1.500 – $5.000</p>
+      <p class="proj-range-note">USD · Sin IVA</p>
+      <p class="proj-includes-label">Incluye</p>
+      <ul class="proj-features">
+        <li><span class="fi-dot"><svg width="7" height="7" viewBox="0 0 10 10" fill="none"><polyline points="2,5.5 4,7.5 8,3" stroke="#0f6e56" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Diseño responsive + mobile</li>
+        <li><span class="fi-dot"><svg width="7" height="7" viewBox="0 0 10 10" fill="none"><polyline points="2,5.5 4,7.5 8,3" stroke="#0f6e56" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Hasta 6 páginas</li>
+        <li><span class="fi-dot"><svg width="7" height="7" viewBox="0 0 10 10" fill="none"><polyline points="2,5.5 4,7.5 8,3" stroke="#0f6e56" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Formulario de contacto</li>
+        <li><span class="fi-dot"><svg width="7" height="7" viewBox="0 0 10 10" fill="none"><polyline points="2,5.5 4,7.5 8,3" stroke="#0f6e56" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>SEO básico + Google Analytics</li>
+        <li><span class="fi-dot"><svg width="7" height="7" viewBox="0 0 10 10" fill="none"><polyline points="2,5.5 4,7.5 8,3" stroke="#0f6e56" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Deploy + dominio configurado</li>
       </ul>
-      <a class="btn-s" href="mailto:support@sivaksoft.com?subject=Prueba%20Starter">Probar 14 días gratis</a>
-      <p class="plan-footnote">Sin tarjeta de crédito</p>
+      <div class="proj-timeline">
+        <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        2 – 4 semanas
+      </div>
+      <a class="btn-g" href="mailto:aaron.soto@sivaksoft.com?subject=Cotización%20Sitio%20Web%20Corporativo">Solicitar cotización →</a>
     </div>
 
-    <!-- Profesional featured -->
-    <div class="plan-card featured">
-      <span class="plan-card-tag">Más popular</span>
-      <p class="plan-tier">Plan · Profesional</p>
-      <h2 class="plan-name">Profesional</h2>
-      <p class="plan-tagline">Para PYMEs en crecimiento que necesitan visibilidad total del negocio.</p>
-      <div class="price-monthly plan-price"><span class="price-curr">USD</span><span class="price-amount">299</span><span class="price-period">/mes</span></div>
-      <div class="price-annual plan-price"><span class="price-curr">USD</span><span class="price-amount">249</span><span class="price-period">/mes</span></div>
-      <p class="price-note annual-note">$2.988 USD/año · Ahorras $600</p>
-      <p class="price-note monthly-note">&nbsp;</p>
-      <hr class="plan-divider" />
-      <div class="plan-users">
-        <svg width="13" height="13" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4" stroke="rgba(255,255,255,.3)" stroke-width="1.8"/><path d="M4 20c0-3.314 3.582-6 8-6s8 2.686 8 6" stroke="rgba(255,255,255,.3)" stroke-width="1.8" stroke-linecap="round"/></svg>
-        Hasta 10 usuarios
-      </div>
-      <ul class="feature-list">
-        <li><span class="fi-check"><svg width="9" height="9" viewBox="0 0 10 10" fill="none"><polyline points="2,5.5 4,7.5 8,3" stroke="#9fe1cb" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Todo lo del plan Starter</li>
-        <li><span class="fi-check"><svg width="9" height="9" viewBox="0 0 10 10" fill="none"><polyline points="2,5.5 4,7.5 8,3" stroke="#9fe1cb" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Contabilidad completa y balances</li>
-        <li><span class="fi-check"><svg width="9" height="9" viewBox="0 0 10 10" fill="none"><polyline points="2,5.5 4,7.5 8,3" stroke="#9fe1cb" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Tesorería y flujo de caja</li>
-        <li><span class="fi-check"><svg width="9" height="9" viewBox="0 0 10 10" fill="none"><polyline points="2,5.5 4,7.5 8,3" stroke="#9fe1cb" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>RRHH y nómina</li>
-        <li><span class="fi-check"><svg width="9" height="9" viewBox="0 0 10 10" fill="none"><polyline points="2,5.5 4,7.5 8,3" stroke="#9fe1cb" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>CRM básico integrado</li>
-        <li><span class="fi-check"><svg width="9" height="9" viewBox="0 0 10 10" fill="none"><polyline points="2,5.5 4,7.5 8,3" stroke="#9fe1cb" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Soporte email + chat (24 h)</li>
+    <!-- E-commerce / tienda online -->
+    <div class="proj-card">
+      <p class="proj-type">Categoría · E-commerce</p>
+      <h3 class="proj-name">Tienda online</h3>
+      <p class="proj-desc">Plataforma de ventas con catálogo de productos, carrito, pagos online y gestión de órdenes.</p>
+      <hr class="proj-divider" />
+      <p class="proj-range-label">Rango estimado</p>
+      <p class="proj-range">$4.000 – $12.000</p>
+      <p class="proj-range-note">USD · Sin IVA</p>
+      <p class="proj-includes-label">Incluye</p>
+      <ul class="proj-features">
+        <li><span class="fi-dot"><svg width="7" height="7" viewBox="0 0 10 10" fill="none"><polyline points="2,5.5 4,7.5 8,3" stroke="#0f6e56" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Catálogo + filtros de productos</li>
+        <li><span class="fi-dot"><svg width="7" height="7" viewBox="0 0 10 10" fill="none"><polyline points="2,5.5 4,7.5 8,3" stroke="#0f6e56" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Carrito y checkout</li>
+        <li><span class="fi-dot"><svg width="7" height="7" viewBox="0 0 10 10" fill="none"><polyline points="2,5.5 4,7.5 8,3" stroke="#0f6e56" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Integración de pagos (Webpay / Stripe)</li>
+        <li><span class="fi-dot"><svg width="7" height="7" viewBox="0 0 10 10" fill="none"><polyline points="2,5.5 4,7.5 8,3" stroke="#0f6e56" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Panel de administración</li>
+        <li><span class="fi-dot"><svg width="7" height="7" viewBox="0 0 10 10" fill="none"><polyline points="2,5.5 4,7.5 8,3" stroke="#0f6e56" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Gestión de órdenes y stock</li>
       </ul>
-      <a class="btn-white" href="mailto:support@sivaksoft.com?subject=Prueba%20Profesional">Probar 14 días gratis</a>
-      <p class="plan-footnote">Sin tarjeta de crédito</p>
+      <div class="proj-timeline">
+        <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        4 – 8 semanas
+      </div>
+      <a class="btn-g" href="mailto:aaron.soto@sivaksoft.com?subject=Cotización%20Tienda%20Online">Solicitar cotización →</a>
     </div>
 
-    <!-- Enterprise -->
-    <div class="plan-card">
-      <p class="plan-tier">Plan · Enterprise</p>
-      <h2 class="plan-name">Enterprise</h2>
-      <p class="plan-tagline">Para empresas con operaciones complejas, múltiples sucursales o requerimientos a medida.</p>
-      <div class="plan-price"><span class="price-curr">USD</span><span class="price-amount">999</span><span class="price-period">+/mes</span></div>
-      <p class="price-note">Precio según requerimientos</p>
-      <hr class="plan-divider" />
-      <div class="plan-users">
-        <svg width="13" height="13" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4" stroke="#b4b2a9" stroke-width="1.8"/><path d="M4 20c0-3.314 3.582-6 8-6s8 2.686 8 6" stroke="#b4b2a9" stroke-width="1.8" stroke-linecap="round"/></svg>
-        Usuarios ilimitados
-      </div>
-      <ul class="feature-list">
-        <li><span class="fi-check"><svg width="9" height="9" viewBox="0 0 10 10" fill="none"><polyline points="2,5.5 4,7.5 8,3" stroke="#0f6e56" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Todo lo del plan Profesional</li>
-        <li><span class="fi-check"><svg width="9" height="9" viewBox="0 0 10 10" fill="none"><polyline points="2,5.5 4,7.5 8,3" stroke="#0f6e56" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>SLA garantizado ≥ 99.5% uptime</li>
-        <li><span class="fi-check"><svg width="9" height="9" viewBox="0 0 10 10" fill="none"><polyline points="2,5.5 4,7.5 8,3" stroke="#0f6e56" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Soporte prioritario (4 h respuesta)</li>
-        <li><span class="fi-check"><svg width="9" height="9" viewBox="0 0 10 10" fill="none"><polyline points="2,5.5 4,7.5 8,3" stroke="#0f6e56" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Onboarding y capacitación incluida</li>
-        <li><span class="fi-check"><svg width="9" height="9" viewBox="0 0 10 10" fill="none"><polyline points="2,5.5 4,7.5 8,3" stroke="#0f6e56" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Integraciones y add-ons a medida</li>
-        <li><span class="fi-check"><svg width="9" height="9" viewBox="0 0 10 10" fill="none"><polyline points="2,5.5 4,7.5 8,3" stroke="#0f6e56" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Pago por transferencia bancaria</li>
+    <!-- Sistema interno / panel de administración -->
+    <div class="proj-card highlight">
+      <p class="proj-type">Categoría · Sistema web</p>
+      <h3 class="proj-name">Sistema interno / panel</h3>
+      <p class="proj-desc">Herramienta a medida para digitalizar procesos internos: gestión, reportes, flujos de aprobación, control de datos.</p>
+      <hr class="proj-divider" />
+      <p class="proj-range-label">Rango estimado</p>
+      <p class="proj-range">$5.000 – $20.000</p>
+      <p class="proj-range-note">USD · Sin IVA · El más solicitado</p>
+      <p class="proj-includes-label">Incluye</p>
+      <ul class="proj-features">
+        <li><span class="fi-dot"><svg width="7" height="7" viewBox="0 0 10 10" fill="none"><polyline points="2,5.5 4,7.5 8,3" stroke="#9fe1cb" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Módulos según requerimiento</li>
+        <li><span class="fi-dot"><svg width="7" height="7" viewBox="0 0 10 10" fill="none"><polyline points="2,5.5 4,7.5 8,3" stroke="#9fe1cb" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Roles y permisos (RBAC)</li>
+        <li><span class="fi-dot"><svg width="7" height="7" viewBox="0 0 10 10" fill="none"><polyline points="2,5.5 4,7.5 8,3" stroke="#9fe1cb" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Dashboard y reportes</li>
+        <li><span class="fi-dot"><svg width="7" height="7" viewBox="0 0 10 10" fill="none"><polyline points="2,5.5 4,7.5 8,3" stroke="#9fe1cb" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Exportación Excel / PDF</li>
+        <li><span class="fi-dot"><svg width="7" height="7" viewBox="0 0 10 10" fill="none"><polyline points="2,5.5 4,7.5 8,3" stroke="#9fe1cb" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>API REST documentada</li>
       </ul>
-      <a class="btn-g" href="mailto:aaron.soto@sivaksoft.com?subject=Consulta%20Enterprise">Consultar precio →</a>
-      <p class="plan-footnote">Contrato personalizado</p>
+      <div class="proj-timeline">
+        <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="rgba(255,255,255,.3)" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        6 – 14 semanas
+      </div>
+      <a class="btn-white" href="mailto:aaron.soto@sivaksoft.com?subject=Cotización%20Sistema%20Interno">Solicitar cotización →</a>
     </div>
+
+  </div>
+
+  <div class="projects-grid-2" style="margin-top:10px;">
+
+    <!-- MVP / Startup -->
+    <div class="proj-card">
+      <p class="proj-type">Categoría · MVP</p>
+      <h3 class="proj-name">MVP para startup</h3>
+      <p class="proj-desc">Versión mínima viable de un producto digital para validar la idea con usuarios reales antes de escalar. Foco en velocidad e iteración.</p>
+      <hr class="proj-divider" />
+      <p class="proj-range-label">Rango estimado</p>
+      <p class="proj-range">$8.000 – $25.000</p>
+      <p class="proj-range-note">USD · Sin IVA · Varía mucho según scope</p>
+      <p class="proj-includes-label">Incluye</p>
+      <ul class="proj-features">
+        <li><span class="fi-dot"><svg width="7" height="7" viewBox="0 0 10 10" fill="none"><polyline points="2,5.5 4,7.5 8,3" stroke="#0f6e56" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Definición de scope y roadmap</li>
+        <li><span class="fi-dot"><svg width="7" height="7" viewBox="0 0 10 10" fill="none"><polyline points="2,5.5 4,7.5 8,3" stroke="#0f6e56" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Frontend + Backend + Base de datos</li>
+        <li><span class="fi-dot"><svg width="7" height="7" viewBox="0 0 10 10" fill="none"><polyline points="2,5.5 4,7.5 8,3" stroke="#0f6e56" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Autenticación de usuarios</li>
+        <li><span class="fi-dot"><svg width="7" height="7" viewBox="0 0 10 10" fill="none"><polyline points="2,5.5 4,7.5 8,3" stroke="#0f6e56" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Deploy en producción</li>
+        <li><span class="fi-dot"><svg width="7" height="7" viewBox="0 0 10 10" fill="none"><polyline points="2,5.5 4,7.5 8,3" stroke="#0f6e56" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>1 mes de soporte post-lanzamiento</li>
+      </ul>
+      <div class="proj-timeline">
+        <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        6 – 12 semanas
+      </div>
+      <a class="btn-s" href="mailto:aaron.soto@sivaksoft.com?subject=Cotización%20MVP">Solicitar cotización →</a>
+    </div>
+
+    <!-- Integración / API / automatización -->
+    <div class="proj-card">
+      <p class="proj-type">Categoría · Integración</p>
+      <h3 class="proj-name">Integración API / automatización</h3>
+      <p class="proj-desc">Conectar sistemas existentes, automatizar flujos de datos entre plataformas, o construir una API para consumir desde otros sistemas.</p>
+      <hr class="proj-divider" />
+      <p class="proj-range-label">Rango estimado</p>
+      <p class="proj-range">$1.500 – $8.000</p>
+      <p class="proj-range-note">USD · Sin IVA · Según complejidad</p>
+      <p class="proj-includes-label">Ejemplos típicos</p>
+      <ul class="proj-features">
+        <li><span class="fi-dot"><svg width="7" height="7" viewBox="0 0 10 10" fill="none"><polyline points="2,5.5 4,7.5 8,3" stroke="#0f6e56" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Integración SII / DTE / OpenFactura</li>
+        <li><span class="fi-dot"><svg width="7" height="7" viewBox="0 0 10 10" fill="none"><polyline points="2,5.5 4,7.5 8,3" stroke="#0f6e56" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Sincronización con ERP o CRM externo</li>
+        <li><span class="fi-dot"><svg width="7" height="7" viewBox="0 0 10 10" fill="none"><polyline points="2,5.5 4,7.5 8,3" stroke="#0f6e56" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Webhooks y automatizaciones</li>
+        <li><span class="fi-dot"><svg width="7" height="7" viewBox="0 0 10 10" fill="none"><polyline points="2,5.5 4,7.5 8,3" stroke="#0f6e56" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>API REST para app móvil o terceros</li>
+        <li><span class="fi-dot"><svg width="7" height="7" viewBox="0 0 10 10" fill="none"><polyline points="2,5.5 4,7.5 8,3" stroke="#0f6e56" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Migración y limpieza de datos</li>
+      </ul>
+      <div class="proj-timeline">
+        <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        1 – 6 semanas
+      </div>
+      <a class="btn-s" href="mailto:aaron.soto@sivaksoft.com?subject=Cotización%20Integración%20API">Solicitar cotización →</a>
+    </div>
+
   </div>
 </section>
 
+<!-- PROCESO -->
 <div class="full-hr"></div>
-<section class="page" id="comparacion">
-  <p class="eyebrow">03 — Comparación</p>
-  <h2 class="section-h">Todo de un vistazo</h2>
-  <p class="section-p">Detalle completo de funcionalidades incluidas en cada plan.</p>
-  <div style="overflow-x:auto;">
-    <table class="ui-table">
-      <thead>
-        <tr>
-          <th style="width:42%">Funcionalidad</th>
-          <th>Starter</th>
-          <th class="col-f">Profesional</th>
-          <th>Enterprise</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="gh"><td colspan="4">Usuarios y acceso</td></tr>
-        <tr><td>Usuarios incluidos</td><td class="partial">3</td><td class="partial">10</td><td class="partial">Ilimitados</td></tr>
-        <tr><td>Control de roles y permisos (RBAC)</td><td class="tick">✓</td><td class="tick">✓</td><td class="tick">✓</td></tr>
-        <tr><td>Múltiples sucursales</td><td class="cross">—</td><td class="partial">2</td><td class="tick">✓</td></tr>
-        <tr class="gh"><td colspan="4">Módulos operativos</td></tr>
-        <tr><td>Maestros (productos, clientes, proveedores)</td><td class="tick">✓</td><td class="tick">✓</td><td class="tick">✓</td></tr>
-        <tr><td>Inventario y control de stock</td><td class="tick">✓</td><td class="tick">✓</td><td class="tick">✓</td></tr>
-        <tr><td>Ventas y cotizaciones</td><td class="tick">✓</td><td class="tick">✓</td><td class="tick">✓</td></tr>
-        <tr><td>Compras y órdenes de compra</td><td class="tick">✓</td><td class="tick">✓</td><td class="tick">✓</td></tr>
-        <tr><td>Facturación electrónica DTE (SII)</td><td class="tick">✓</td><td class="tick">✓</td><td class="tick">✓</td></tr>
-        <tr class="gh"><td colspan="4">Finanzas y contabilidad</td></tr>
-        <tr><td>Contabilidad básica y libro mayor</td><td class="tick">✓</td><td class="tick">✓</td><td class="tick">✓</td></tr>
-        <tr><td>Contabilidad completa y balances</td><td class="cross">—</td><td class="tick">✓</td><td class="tick">✓</td></tr>
-        <tr><td>Tesorería y flujo de caja</td><td class="cross">—</td><td class="tick">✓</td><td class="tick">✓</td></tr>
-        <tr class="gh"><td colspan="4">Recursos Humanos</td></tr>
-        <tr><td>Gestión de empleados</td><td class="cross">—</td><td class="tick">✓</td><td class="tick">✓</td></tr>
-        <tr><td>Nómina y liquidaciones</td><td class="cross">—</td><td class="tick">✓</td><td class="tick">✓</td></tr>
-        <tr class="gh"><td colspan="4">CRM</td></tr>
-        <tr><td>CRM básico integrado</td><td class="cross">—</td><td class="tick">✓</td><td class="tick">✓</td></tr>
-        <tr><td>CRM avanzado</td><td class="cross">—</td><td class="partial">+ tarifa</td><td class="tick">✓ incl.</td></tr>
-        <tr class="gh"><td colspan="4">Reportes</td></tr>
-        <tr><td>Reportes estándar</td><td class="tick">✓</td><td class="tick">✓</td><td class="tick">✓</td></tr>
-        <tr><td>Dashboards y KPIs avanzados</td><td class="cross">—</td><td class="tick">✓</td><td class="tick">✓</td></tr>
-        <tr><td>Exportación Excel / CSV</td><td class="tick">✓</td><td class="tick">✓</td><td class="tick">✓</td></tr>
-        <tr class="gh"><td colspan="4">Soporte</td></tr>
-        <tr><td>Email</td><td class="partial">48 h</td><td class="partial">24 h</td><td class="partial">4 h</td></tr>
-        <tr><td>Chat</td><td class="cross">—</td><td class="tick">✓</td><td class="tick">✓</td></tr>
-        <tr><td>Onboarding personalizado</td><td class="cross">—</td><td class="cross">—</td><td class="tick">✓</td></tr>
-        <tr><td>SLA garantizado ≥ 99.5%</td><td class="cross">—</td><td class="cross">—</td><td class="tick">✓</td></tr>
-        <tr class="gh"><td colspan="4">Facturación</td></tr>
-        <tr><td>Prueba gratuita 14 días</td><td class="tick">✓</td><td class="tick">✓</td><td class="tick">✓</td></tr>
-        <tr><td>Pago mensual</td><td class="tick">✓</td><td class="tick">✓</td><td class="tick">✓</td></tr>
-        <tr><td>Pago anual (−17%)</td><td class="tick">✓</td><td class="tick">✓</td><td class="tick">✓</td></tr>
-        <tr><td>Pago por transferencia bancaria</td><td class="cross">—</td><td class="cross">—</td><td class="tick">✓</td></tr>
-      </tbody>
-    </table>
-  </div>
-</section>
-
-<div class="full-hr"></div>
-<div class="billing-section">
-  <div class="billing-inner">
-    <div>
-      <p class="billing-eyebrow">04 — Facturación</p>
-      <h2 class="billing-h">Condiciones<br>de pago</h2>
-      <p class="billing-p">Precios en USD sin IVA. Al facturar en Chile se aplica el 19%. Planes disponibles en CLP al tipo de cambio del día.</p>
-      <div class="billing-items">
-        <div class="billing-item">
-          <div class="bi-icon"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg></div>
-          <div><p class="bi-title">Pago vía Stripe</p><p class="bi-desc">Visa, Mastercard y Amex. Cargo automático al inicio de cada período.</p></div>
-        </div>
-        <div class="billing-item">
-          <div class="bi-icon"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
-          <div><p class="bi-title">Facturación anual (−17%)</p><p class="bi-desc">Paga un año por adelantado y ahorra dos meses. Sin compromiso adicional.</p></div>
-        </div>
-        <div class="billing-item">
-          <div class="bi-icon"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
-          <div><p class="bi-title">Renovación automática con aviso previo</p><p class="bi-desc">Recibirás un correo 7 días antes de cada renovación. Sin sorpresas.</p></div>
-        </div>
+<div class="proceso-section" id="proceso">
+  <div class="proceso-inner">
+    <p class="proceso-eyebrow">03 — Cómo funciona</p>
+    <h2 class="proceso-h">Del contacto al sistema en producción</h2>
+    <p class="proceso-p">Proceso claro, sin sorpresas. Siempre empezamos entendiendo el problema antes de proponer una solución.</p>
+    <div class="steps-grid">
+      <div class="step-card">
+        <p class="step-num">01 — Reunión inicial</p>
+        <h3 class="step-title">Levantamiento gratuito</h3>
+        <p class="step-desc">30–60 min para entender el problema, los usuarios, los procesos actuales y los objetivos del sistema. Sin costo.</p>
       </div>
-    </div>
-    <div>
-      <p class="billing-eyebrow">05 — Cancelación</p>
-      <h2 class="billing-h">Sin<br>ataduras</h2>
-      <p class="billing-p">Cancela en cualquier momento desde tu panel. Tus datos quedan disponibles 90 días para exportar.</p>
-      <div class="billing-items">
-        <div class="billing-item">
-          <div class="bi-icon"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
-          <div><p class="bi-title">14 días gratis, sin tarjeta</p><p class="bi-desc">Acceso completo. Si no te convence, no se cobra nada.</p></div>
-        </div>
-        <div class="billing-item">
-          <div class="bi-icon"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div>
-          <div><p class="bi-title">Exporta tus datos en 90 días</p><p class="bi-desc">Al cancelar, tus datos quedan disponibles para exportar en CSV o Excel.</p></div>
-        </div>
-        <div class="billing-item">
-          <div class="bi-icon"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
-          <div><p class="bi-title">¿Tienes dudas?</p><p class="bi-desc">Escríbenos a <a href="mailto:support@sivaksoft.com">support@sivaksoft.com</a> — respondemos en menos de 24 h hábiles.</p></div>
-        </div>
+      <div class="step-card">
+        <p class="step-num">02 — Propuesta</p>
+        <h3 class="step-title">Cotización formal</h3>
+        <p class="step-desc">Documento con alcance, funcionalidades incluidas, plazo estimado y precio fijo o tarifa. Válido por 30 días.</p>
+      </div>
+      <div class="step-card">
+        <p class="step-num">03 — Desarrollo</p>
+        <h3 class="step-title">Entregas iterativas</h3>
+        <p class="step-desc">Sprints de 1–2 semanas con demos al cliente. Acceso a ambiente de pruebas desde la primera semana.</p>
+      </div>
+      <div class="step-card">
+        <p class="step-num">04 — Entrega</p>
+        <h3 class="step-title">Traspaso y soporte</h3>
+        <p class="step-desc">Deploy en producción, capacitación al equipo y 30 días de soporte post-lanzamiento incluidos en todos los proyectos.</p>
       </div>
     </div>
   </div>
 </div>
 
+<!-- FAQ -->
 <div class="full-hr"></div>
 <section class="page" id="faq">
-  <p class="eyebrow">06 — Preguntas frecuentes</p>
+  <p class="eyebrow">04 — Preguntas frecuentes</p>
   <h2 class="section-h">FAQ</h2>
-  <p class="section-p">¿Algo que no esté claro? Escríbenos a <a href="mailto:support@sivaksoft.com" style="color:var(--link)">support@sivaksoft.com</a></p>
+  <p class="section-p">Preguntas habituales antes de contratar. Si no está tu duda aquí, escríbenos a <a href="mailto:aaron.soto@sivaksoft.com" style="color:var(--link)">aaron.soto@sivaksoft.com</a></p>
   <div class="faq-wrap">
-    <details><summary>¿Los precios incluyen IVA?</summary><p>No. Todos los precios son <strong>sin IVA</strong>. Al facturar en Chile se agrega el 19%. Contáctanos si necesitas una cotización con valores brutos.</p></details>
-    <details><summary>¿Puedo cambiar de plan en cualquier momento?</summary><p>Sí. Desde tu panel de administración, de forma inmediata. La diferencia se prorratea en el siguiente período de facturación.</p></details>
-    <details><summary>¿Qué pasa con mis datos si cancelo?</summary><p>Quedan disponibles para exportación durante <strong>90 días</strong> tras la cancelación, en formato CSV o Excel desde el módulo de reportes.</p></details>
-    <details><summary>¿La facturación electrónica DTE viene en todos los planes?</summary><p>Sí. La integración con el SII vía <strong>OpenFactura / Haulmer</strong> está incluida en todos los planes sin costo adicional — boletas, facturas, notas de crédito y demás DTE.</p></details>
-    <details><summary>¿Pueden facturar en pesos chilenos (CLP)?</summary><p>Sí. Los planes Starter y Profesional se pueden contratar en <strong>USD o CLP</strong> al tipo de cambio del día. Para Enterprise, la moneda se acuerda en el contrato.</p></details>
-    <details><summary>¿Cómo funciona el plan Enterprise?</summary><p>Parte en <strong>$999 USD/mes</strong> y se ajusta según usuarios, módulos adicionales e integraciones. Incluye SLA ≥ 99.5%, soporte en 4 h y onboarding personalizado. Escríbenos a <a href="mailto:aaron.soto@sivaksoft.com">aaron.soto@sivaksoft.com</a>.</p></details>
-    <details><summary>¿Existe prueba gratuita?</summary><p><strong>14 días gratis</strong>, sin tarjeta de crédito, acceso completo al plan elegido. Al vencer, la cuenta se suspende sin cargo si no activas la suscripción.</p></details>
-    <details><summary>¿Hay descuento para ONGs o startups en etapa temprana?</summary><p>Evaluamos casos puntualmente. Escríbenos a <a href="mailto:aaron.soto@sivaksoft.com">aaron.soto@sivaksoft.com</a> con el contexto de tu organización.</p></details>
+    <details>
+      <summary>¿Por qué los rangos de precio son tan amplios?</summary>
+      <p>Porque el costo real depende de la complejidad. Un sistema de gestión con 3 módulos simples no cuesta lo mismo que uno con 8 módulos, integraciones con terceros y múltiples roles. Los rangos muestran el espacio posible — la cotización formal lo precisa tras el levantamiento.</p>
+    </details>
+    <details>
+      <summary>¿Cuánto cuesta la reunión de levantamiento?</summary>
+      <p><strong>Es gratuita.</strong> Nunca cotizamos sin entender primero el problema. Si tras la reunión concluimos que el proyecto no es para nosotros, te lo decimos con honestidad y sin cobrar nada.</p>
+    </details>
+    <details>
+      <summary>¿Cuánto tiempo toma el desarrollo?</summary>
+      <p>Depende del tipo y tamaño del proyecto. Un sitio web corporativo puede estar listo en 2–3 semanas. Un sistema interno complejo puede tomar 3–4 meses. Siempre indicamos el plazo estimado en la propuesta formal.</p>
+    </details>
+    <details>
+      <summary>¿Qué pasa si el scope cambia durante el desarrollo?</summary>
+      <p>Trabajamos con <strong>cambios controlados</strong>. Si el cliente necesita agregar funcionalidades no incluidas en la propuesta original, se cotiza el cambio y se acepta antes de implementar. No hay sorpresas en la factura final.</p>
+    </details>
+    <details>
+      <summary>¿Qué pasa después de entregar el proyecto?</summary>
+      <p>Todos los proyectos incluyen <strong>30 días de soporte post-lanzamiento</strong> sin costo adicional. Para mantenimiento continuo ofrecemos bloques mensuales de horas a tarifa preferencial.</p>
+    </details>
+    <details>
+      <summary>¿El código fuente queda en manos del cliente?</summary>
+      <p>Sí. Al finalizar el proyecto, el cliente recibe <strong>acceso completo al repositorio</strong> con todo el código fuente, documentación técnica y credenciales de los servicios contratados a su nombre.</p>
+    </details>
+    <details>
+      <summary>¿Facturan en Chile con boleta o factura?</summary>
+      <p>Sivak SpA emite <strong>factura electrónica (DTE)</strong> por todos los servicios. Precios indicados en USD sin IVA; al facturar en Chile se agrega el 19%. También podemos facturar en CLP al tipo de cambio del día.</p>
+    </details>
+    <details>
+      <summary>¿Trabajan con empresas fuera de Chile?</summary>
+      <p>Sí. Trabajamos con clientes en Chile y LATAM en general. Para empresas en el extranjero, coordinamos pago en USD vía transferencia o Stripe y ajustamos los horarios de comunicación según zona horaria.</p>
+    </details>
   </div>
 </section>
 
+<!-- FOOTER -->
 <footer>
   <div class="footer-brand">
     <svg width="16" height="16" viewBox="0 0 36 36" fill="none">
@@ -495,22 +489,10 @@ body.annual .monthly-note{display:none;}
     Sivak
   </div>
   <div class="footer-meta">
-    <div>© 2026 Sivak SpA · Chile · <a href="mailto:support@sivaksoft.com">support@sivaksoft.com</a> · <a href="https://sivaksoft.com">sivaksoft.com</a></div>
-    <div>Precios en USD sin IVA · Sujeto a cambios con previo aviso · <a href="#">Términos de Servicio</a></div>
+    <div>© 2026 Sivak SpA · Chile · <a href="mailto:aaron.soto@sivaksoft.com">aaron.soto@sivaksoft.com</a> · <a href="https://sivaksoft.com">sivaksoft.com</a></div>
+    <div>Precios en USD sin IVA · Rangos referenciales · Sujeto a cotización formal</div>
   </div>
 </footer>
 
-<script>
-  const toggle = document.getElementById('billing-toggle');
-  const optM = document.getElementById('opt-monthly');
-  const optA = document.getElementById('opt-annual');
-  toggle.addEventListener('click', () => {
-    const annual = toggle.classList.toggle('on');
-    toggle.setAttribute('aria-pressed', annual);
-    document.body.classList.toggle('annual', annual);
-    optM.classList.toggle('active', !annual);
-    optA.classList.toggle('active', annual);
-  });
-</script>
 </body>
 </html>
